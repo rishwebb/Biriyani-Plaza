@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Order Online | Biriyani Plaza</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    .menu-header { text-align: center; margin-bottom: 50px; }
+    .menu-header h1 { font-size: 3.5rem; }
+    .menu-layout { display: flex; gap: 40px; }
+    .sidebar { flex: 0 0 250px; background: rgba(255,255,255,0.02); padding: 20px; border-radius: 15px; height: fit-content; position: sticky; top: 120px; border: 1px solid var(--glass-border); }
+    .category-btn { display: block; width: 100%; border: none; background: none; color: var(--text-muted); text-align: left; padding: 10px; font-size: 1.1rem; cursor: pointer; transition: 0.3s; border-radius: 8px; }
+    .category-btn:hover, .category-btn.active { background: rgba(255,255,255,0.05); color: #fff; padding-left: 20px; border-left: 3px solid var(--accent-orange); }
+    .menu-grid { flex: 1; display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 30px; }
+    .menu-item-card { background: rgba(15,15,15,0.7); border-radius: 12px; overflow: hidden; perspective: 1000px; padding: 15px; display: flex; flex-direction: column; height: 100%; }
+    .item-img-container { width: 100%; aspect-ratio: 4/3; overflow: hidden; border-radius: 8px; position: relative; }
+    .item-img-container img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.6s var(--easing); }
+    .menu-item-card:hover .item-img-container img { transform: scale(1.1) translateZ(30px); }
+    .veg-badge { position: absolute; top: 10px; right: 10px; width: 12px; height: 12px; border-radius: 50%; border: 2px solid white; box-shadow: 0 0 10px rgba(0,0,0,0.5); z-index: 5; }
+    .veg-true { background: #2ecc71; } .veg-false { background: #e74c3c; }
+    .item-details { display: flex; flex-direction: column; margin-top: 15px; flex: 1; }
+    .item-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 5px; }
+    .item-name { font-size: 1.2rem; margin: 0; }
+    .item-price { font-size: 1.2rem; font-weight: bold; }
+    .item-desc { color: var(--text-muted); font-size: 0.9rem; margin-bottom: 15px; display: -webkit-box; -webkit-line-clamp: 2; line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+    .item-actions { display: flex; gap: 10px; margin-top: auto; }
+    .btn-icon { width: 44px; height: 44px; display: flex; align-items: center; justify-content: center; background: rgba(255,255,255,0.05); border-radius: 50%; color: var(--text-main); font-size: 1.1rem; border: 1px solid var(--glass-border); transition: 0.3s; text-decoration: none; cursor: pointer; }
+    .btn-icon:hover { background: var(--accent-orange); border-color: var(--accent-orange); transform: translateY(-3px); }
+    .flex-1 { flex: 1; justify-content: center; }
+  </style>
+</head>
+<body>
+
+  <!-- Global Navbar -->
+  <nav class="navbar scrolled" id="navbar">
+    <div class="container nav-container">
+      <a href="index.html" class="logo"><span class="text-gradient">Biriyani</span>Plaza</a>
+      <div class="nav-links">
+        <a href="index.html">Home</a>
+        <a href="menu.html">Menu</a>
+        <a href="order.html" class="active">Order Online</a>
+      </div>
+      <div class="nav-actions">
+        <a href="cart.html" class="cart-icon" style="text-decoration:none;">
+          <i class="fa-solid fa-bag-shopping"></i>
+          <span class="cart-count">0</span>
+        </a>
+      </div>
+    </div>
+  </nav>
+
+  <section class="section">
+    <div class="container" style="padding-top: 50px;">
+      <div class="menu-header">
+        <h1>Order <span class="text-gradient">Online</span></h1>
+        <p style="color: var(--text-muted); font-size: 1.1rem;">Add dishes directly to your cart for doorstep delivery.</p>
+      </div>
+
+      <div class="menu-layout">
+        <aside class="sidebar">
+          <h3 style="margin-bottom: 20px; color: var(--text-muted); text-transform: uppercase;">Categories</h3>
+          <div id="category-list"></div>
+        </aside>
+
+        <div class="menu-grid" id="menu-grid">
+          <!-- Rendered via JS -->
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Massive Footer -->
+  <footer class="main-footer">
+    <div class="container footer-grid">
+      <div class="footer-brand">
+        <h2><span class="text-gradient">Biriyani</span> Plaza</h2>
+        <p>Experience the ultimate 3D dining journey in India. Best Biryani in Chakdaha Locality.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Explore</h4>
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="menu.html">Full Menu</a></li>
+          <li><a href="index.html#about">About Us</a></li>
+          <li><a href="order.html">Order Online</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Contact</h4>
+        <ul>
+          <li><a href="tel:+917699231380">+91 7699231380</a></li>
+          <li><a href="#">Lalpur, Chakdaha Locality</a></li>
+          <li><a href="#">Delivery only online</a></li>
+        </ul>
+      </div>
+    </div>
+  </footer>
+
+  <script src="js/data.js"></script>
+  <script src="js/main.js"></script>
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      const categoryList = document.getElementById("category-list");
+      const menuGrid = document.getElementById("menu-grid");
+
+      const categories = ["All", "Biryani", "Starters", "Main Course", "Breads", "Fried Rice and Noodles", "Snacks", "Drinks (Beverages)"];
+      let activeCategory = "All";
+
+      function renderCategories() {
+        categoryList.innerHTML = categories.map(c => 
+          `<button class="category-btn ${activeCategory === c ? 'active' : ''}" onclick="window.filterMenu('${c}')">${c}</button>`
+        ).join("");
+      }
+
+      function renderGrid() {
+        const items = activeCategory === "All" ? window.menuData : window.menuData.filter(i => i.category === activeCategory);
+        
+        if (items.length === 0) {
+          menuGrid.innerHTML = `<p style="text-align:center; color: var(--text-muted); grid-column: 1 / -1; padding: 40px;">No items found in this category.</p>`;
+          return;
+        }
+
+        menuGrid.innerHTML = items.map(item => `
+          <div class="menu-item-card">
+            <a href="item.html?id=${item.id}" style="display:block;" class="item-img-container">
+               <img src="${item.image}" alt="${item.name}">
+               <div class="veg-badge ${item.isVeg ? 'veg-true' : 'veg-false'}"></div>
+            </a>
+            <div class="item-details">
+              <div class="item-header">
+                <h3 class="item-name">${item.name}</h3>
+                <span class="item-price text-gradient">₹${item.price}</span>
+              </div>
+              <p class="item-desc">${item.description}</p>
+              <div class="item-actions">
+                <a href="item.html?id=${item.id}" class="btn-icon" title="View Details"><i class="fa-solid fa-info"></i></a>
+                <button class="btn btn-primary flex-1 btn-small" style="padding: 10px; font-size: 0.9rem;" onclick="window.addToCart('${item.id}', '${item.name.replace(/'/g, "\\'")}', ${item.price}, '${item.image}')"><i class="fa-solid fa-cart-plus"></i> Add to Cart</button>
+              </div>
+            </div>
+          </div>
+        `).join("");
+      }
+
+      window.filterMenu = (cat) => {
+        activeCategory = cat;
+        renderCategories();
+        renderGrid();
+      };
+
+      // Init
+      renderCategories();
+      renderGrid();
+    });
+  </script>
+</body>
+</html>

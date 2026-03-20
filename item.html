@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Item Details | Biriyani Plaza</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+  <style>
+    .item-detail-layout { display: flex; gap: 60px; align-items: center; margin-top: 40px; }
+    .item-image-wrapper { flex: 1; perspective: 1500px; display: flex; justify-content: center; position: relative; }
+    .hero-platter { width: 100%; max-width: 500px; border-radius: 20px; box-shadow: 0 40px 60px rgba(0,0,0,0.8); z-index: 2; position: relative; }
+    .glow-aura { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 90%; height: 90%; background: var(--accent-orange); filter: blur(120px); opacity: 0.15; border-radius: 50%; z-index: 1; }
+    .item-info-wrapper { flex: 1; }
+    .item-cat { background: rgba(255,255,255,0.05); border: 1px solid var(--glass-border); padding: 4px 12px; border-radius: 20px; font-size: 0.85rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 1px; }
+    .title { font-size: 3.5rem; line-height: 1.1; margin: 15px 0; font-weight: 800; letter-spacing: -1px; }
+    .rating-wrapper { display: flex; align-items: center; gap: 5px; color: var(--accent-gold); margin-bottom: 20px; padding-bottom: 20px; border-bottom: 1px solid var(--glass-border); }
+    .rating-wrapper span { color: var(--text-muted); margin-left: 10px; font-size: 0.9rem; }
+    .description { font-size: 1.2rem; color: var(--text-muted); margin-bottom: 30px; line-height: 1.6; }
+    .price-bar { display: flex; justify-content: space-between; align-items: center; background: rgba(255,255,255,0.02); padding: 20px 30px; border-radius: 16px; border: 1px solid var(--glass-border); margin-bottom: 30px; }
+    .price-text { font-size: 2.5rem; font-weight: 800; }
+    .qty-controls { display: flex; align-items: center; background: rgba(0,0,0,0.5); border-radius: 30px; border: 1px solid var(--glass-border); padding: 5px; }
+    .qty-btn { width: 40px; height: 40px; background: none; border: none; color: white; cursor: pointer; border-radius: 50%; transition: 0.3s; font-size: 1.2rem; }
+    .qty-btn:hover { background: rgba(255,255,255,0.1); color: var(--accent-orange); }
+    .qty-display { width: 40px; text-align: center; font-size: 1.2rem; font-weight: bold; }
+    .back-btn { margin-bottom: 20px; display: inline-flex; align-items: center; gap: 10px; color: var(--text-muted); text-decoration: none; transition: 0.3s; }
+    .back-btn:hover { color: var(--accent-orange); }
+  </style>
+</head>
+<body>
+
+  <!-- Global Navbar -->
+  <nav class="navbar scrolled" id="navbar">
+    <div class="container nav-container">
+      <a href="index.html" class="logo"><span class="text-gradient">Biriyani</span>Plaza</a>
+      <div class="nav-links">
+        <a href="index.html">Home</a>
+        <a href="menu.html">Menu</a>
+        <a href="order.html">Order Online</a>
+      </div>
+      <div class="nav-actions">
+        <a href="cart.html" class="cart-icon" style="text-decoration:none;">
+          <i class="fa-solid fa-bag-shopping"></i>
+          <span class="cart-count">0</span>
+        </a>
+      </div>
+    </div>
+  </nav>
+
+  <section class="section">
+    <div class="container" style="padding-top: 50px;">
+      <a href="menu.html" class="back-btn"><i class="fa-solid fa-arrow-left"></i> Back to Menu</a>
+      
+      <div id="item-rendering-container">
+        <!-- Rendered via JS -->
+      </div>
+    </div>
+  </section>
+
+  <!-- Massive Footer -->
+  <footer class="main-footer">
+    <!-- Same footer -->
+    <div class="container footer-grid">
+      <div class="footer-brand">
+        <h2><span class="text-gradient">Biriyani</span> Plaza</h2>
+        <p>Experience the ultimate 3D dining journey in India. Best Biryani in Chakdaha Locality.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Explore</h4>
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="menu.html">Full Menu</a></li>
+          <li><a href="index.html#about">About Us</a></li>
+          <li><a href="menu.html">Order Online</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Legal</h4>
+        <ul>
+          <li><a href="#">Privacy Policy</a></li>
+          <li><a href="#">Terms & Conditions</a></li>
+          <li><a href="#">Refund Policy</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Contact</h4>
+        <ul>
+          <li><a href="tel:+917699231380">+91 7699231380</a></li>
+          <li><a href="#">Lalpur, Chakdaha Locality</a></li>
+          <li><a href="#">Delivery only online</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; 2024 Biriyani Plaza Multicuisine. Pure HTML/CSS/JS 3D Experience.</p>
+    </div>
+  </footer>
+
+  <script src="js/data.js"></script>
+  <script src="js/main.js"></script>
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      const urlParams = new URLSearchParams(window.location.search);
+      const id = urlParams.get('id');
+      const item = window.menuData.find(i => i.id === id);
+      const container = document.getElementById('item-rendering-container');
+
+      if (!item) {
+        container.innerHTML = `<h2 style="text-align: center; margin-top: 50px;">Item not found!</h2>`;
+        return;
+      }
+
+      // We maintain state in JS for price
+      let qty = 1;
+
+      window.updateQty = (delta) => {
+        qty += delta;
+        if (qty < 1) qty = 1;
+        if (qty > 10) qty = 10;
+        document.getElementById('qty-val').innerText = qty;
+        document.getElementById('total-price').innerText = `₹${item.price * qty}`;
+        document.getElementById('btn-total').innerText = `₹${item.price * qty}`;
+      };
+
+      container.innerHTML = `
+        <div class="item-detail-layout">
+          <div class="item-image-wrapper">
+            <div class="glow-aura"></div>
+            <img src="${item.image}" alt="${item.name}" class="hero-platter" id="item-3d-img">
+          </div>
+          <div class="item-info-wrapper gsap-info">
+            <span class="item-cat">${item.category}</span>
+            <span class="item-cat" style="background: ${item.isVeg ? '#2ecc71' : '#e74c3c'}; color: white; border:none; margin-left: 10px;">${item.isVeg ? 'Veg' : 'Non-Veg'}</span>
+            <h1 class="title">${item.name}</h1>
+            
+            <div class="rating-wrapper">
+              <i class="fa-solid fa-star"></i>
+              <i class="fa-solid fa-star"></i>
+              <i class="fa-solid fa-star"></i>
+              <i class="fa-solid fa-star"></i>
+              <i class="fa-regular fa-star"></i>
+              <span>(120 Authentic Reviews)</span>
+            </div>
+
+            <p class="description">${item.description}</p>
+            
+            <div class="price-bar">
+              <span class="price-text text-gradient" id="total-price">₹${item.price}</span>
+              <div class="qty-controls">
+                <button class="qty-btn" onclick="updateQty(-1)"><i class="fa-solid fa-minus"></i></button>
+                <div class="qty-display" id="qty-val">${qty}</div>
+                <button class="qty-btn" onclick="updateQty(1)"><i class="fa-solid fa-plus"></i></button>
+              </div>
+            </div>
+
+            <button class="btn btn-primary" style="width: 100%; padding: 18px;" onclick="window.addToCart('${item.id}', '${item.name.replace(/'/g, "\\'")}', ${item.price}, '${item.image}', qty)">
+              <i class="fa-solid fa-bag-shopping" style="margin-right: 10px;"></i> Add to Cart — <span id="btn-total">₹${item.price}</span>
+            </button>
+          </div>
+        </div>
+      `;
+
+      // 3D GSAP animation for the image
+      const img = document.getElementById('item-3d-img');
+      gsap.fromTo(img, 
+        { rotateY: -30, rotateX: 20, scale: 0.8, opacity: 0 }, 
+        { rotateY: 0, rotateX: 0, scale: 1, opacity: 1, duration: 1.5, ease: "power3.out" }
+      );
+      
+      gsap.to(img, {
+        y: -15,
+        rotationX: 5,
+        rotationY: -5,
+        duration: 3,
+        yoyo: true,
+        repeat: -1,
+        ease: "sine.inOut"
+      });
+
+      // Add Mouse Parallax
+      document.addEventListener("mousemove", (e) => {
+        const x = (window.innerWidth / 2 - e.pageX) / 40;
+        const y = (window.innerHeight / 2 - e.pageY) / 40;
+        gsap.to(img, {
+          rotationY: x,
+          rotationX: y,
+          ease: "power1.out",
+          duration: 1
+        });
+      });
+
+      // End GSAP
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Shopping Cart | Biriyani Plaza</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    .cart-page-layout { display: flex; gap: 40px; align-items: flex-start; }
+    .cart-items-list { flex: 2; background: rgba(255,255,255,0.02); border: 1px solid var(--glass-border); border-radius: 12px; padding: 30px; }
+    .cart-summary { flex: 1; background: rgba(0,0,0,0.6); border: 1px solid var(--glass-border); border-radius: 12px; padding: 30px; position: sticky; top: 120px; }
+    .cart-item-row { display: flex; align-items: center; gap: 20px; padding-bottom: 20px; border-bottom: 1px solid rgba(255,255,255,0.05); margin-bottom: 20px; }
+    .cart-item-row img { width: 100px; height: 100px; object-fit: cover; border-radius: 10px; }
+    .cart-item-info { flex: 1; }
+    .cart-item-info h3 { font-size: 1.2rem; margin-bottom: 8px; }
+    .cart-price { font-weight: bold; color: var(--accent-gold); font-size: 1.2rem; margin-bottom: 10px; display: block; }
+    .qty-controls { display: flex; align-items: center; background: rgba(255,255,255,0.05); width: max-content; padding: 5px; border-radius: 20px; }
+    .qty-controls button { background: none; border: none; color: white; width: 30px; height: 30px; border-radius: 50%; cursor: pointer; transition: 0.3s; }
+    .qty-controls button:hover { background: rgba(255,255,255,0.1); color: var(--accent-orange); }
+    .qty-controls span { margin: 0 15px; font-weight: bold; }
+    .remove-btn { background: none; border: none; color: var(--text-muted); cursor: pointer; font-size: 1.4rem; transition: 0.3s; padding: 10px; }
+    .remove-btn:hover { color: var(--accent-red); }
+    .summary-row { display: flex; justify-content: space-between; margin-bottom: 15px; color: var(--text-muted); font-size: 1.1rem; }
+    .total-row { color: white; font-size: 1.8rem; font-weight: bold; padding-top: 20px; border-top: 1px dashed rgba(255,255,255,0.1); margin-bottom: 30px; margin-top: 10px; }
+    .empty-cart { text-align: center; padding: 60px 20px; }
+    .empty-cart i { font-size: 4rem; color: var(--text-muted); margin-bottom: 20px; }
+  </style>
+</head>
+<body>
+
+  <!-- Global Navbar -->
+  <nav class="navbar scrolled" id="navbar">
+    <div class="container nav-container">
+      <a href="index.html" class="logo"><span class="text-gradient">Biriyani</span>Plaza</a>
+      <div class="nav-links">
+        <a href="index.html">Home</a>
+        <a href="menu.html">Menu</a>
+        <a href="order.html">Order Online</a>
+      </div>
+      <div class="nav-actions">
+        <a href="cart.html" class="cart-icon" style="text-decoration:none;">
+          <i class="fa-solid fa-bag-shopping"></i>
+          <span class="cart-count">0</span>
+        </a>
+      </div>
+    </div>
+  </nav>
+
+  <section class="section">
+    <div class="container" style="padding-top: 50px;">
+      <h1 style="font-size: 3rem; margin-bottom: 40px;">Your <span class="text-gradient">Cart</span></h1>
+
+      <div class="cart-page-layout">
+        <div class="cart-items-list" id="cart-item-container">
+          <!-- Rendered via JS -->
+        </div>
+
+        <div class="cart-summary">
+          <h2 style="margin-bottom: 25px;">Order Summary</h2>
+          <div class="summary-row">
+            <span>Subtotal</span>
+            <span id="summary-subtotal">₹0</span>
+          </div>
+          <div class="summary-row">
+            <span>Delivery Fee</span>
+            <span>₹50</span>
+          </div>
+          <div class="summary-row total-row">
+            <span>Total</span>
+            <span class="text-gradient" id="summary-total">₹0</span>
+          </div>
+          <button class="btn btn-primary" style="width: 100%; padding: 18px;" onclick="placeOrder()">Place Order</button>
+          <a href="order.html" class="btn btn-secondary" style="width: 100%; padding: 15px; margin-top: 15px; text-align: center;">Continue Shopping</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Massive Footer -->
+  <footer class="main-footer">
+    <div class="container footer-grid">
+      <div class="footer-brand">
+        <h2><span class="text-gradient">Biriyani</span> Plaza</h2>
+        <p>Experience the ultimate 3D dining journey in India.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Explore</h4>
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="menu.html">Full Menu</a></li>
+          <li><a href="order.html">Order Online</a></li>
+        </ul>
+      </div>
+    </div>
+  </footer>
+
+  <script src="js/main.js"></script>
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      renderCartPage();
+    });
+
+    function renderCartPage() {
+      const container = document.getElementById("cart-item-container");
+      const subEl = document.getElementById("summary-subtotal");
+      const totEl = document.getElementById("summary-total");
+      
+      const locCart = JSON.parse(localStorage.getItem('bp_cart')) || [];
+      
+      if(locCart.length === 0) {
+        container.innerHTML = `
+          <div class="empty-cart">
+            <i class="fa-solid fa-cart-shopping"></i>
+            <h3>Your cart is empty</h3>
+            <p style="color: var(--text-muted); margin-top: 10px;">Looks like you haven't made your choice yet.</p>
+            <a href="order.html" class="btn btn-primary" style="margin-top: 25px;">Start Ordering</a>
+          </div>
+        `;
+        subEl.innerText = "₹0";
+        totEl.innerText = "₹0";
+        return;
+      }
+
+      container.innerHTML = locCart.map(item => `
+        <div class="cart-item-row">
+          <img src="${item.image}" alt="${item.name}">
+          <div class="cart-item-info">
+            <h3>${item.name}</h3>
+            <span class="cart-price">₹${item.price}</span>
+            <div class="qty-controls">
+              <button onclick="changeQty('${item.id}', -1)"><i class="fa-solid fa-minus"></i></button>
+              <span>${item.quantity}</span>
+              <button onclick="changeQty('${item.id}', 1)"><i class="fa-solid fa-plus"></i></button>
+            </div>
+          </div>
+          <button class="remove-btn" onclick="removeItem('${item.id}')"><i class="fa-solid fa-trash"></i></button>
+        </div>
+      `).join('');
+
+      const subtotal = locCart.reduce((sum, i) => sum + (i.price * i.quantity), 0);
+      subEl.innerText = `₹${subtotal}`;
+      totEl.innerText = `₹${subtotal + 50}`;
+    }
+
+    window.changeQty = function(id, delta) {
+      let locCart = JSON.parse(localStorage.getItem('bp_cart')) || [];
+      const item = locCart.find(i => i.id === id);
+      if(item) {
+        item.quantity += delta;
+        if(item.quantity <= 0) {
+          locCart = locCart.filter(i => i.id !== id);
+        }
+        localStorage.setItem('bp_cart', JSON.stringify(locCart));
+        renderCartPage();
+        if(window.updateCartBadge) window.updateCartBadge();
+      }
+    }
+
+    window.removeItem = function(id) {
+      let locCart = JSON.parse(localStorage.getItem('bp_cart')) || [];
+      locCart = locCart.filter(i => i.id !== id);
+      localStorage.setItem('bp_cart', JSON.stringify(locCart));
+      renderCartPage();
+      if(window.updateCartBadge) window.updateCartBadge();
+    }
+
+    window.placeOrder = function() {
+      let locCart = JSON.parse(localStorage.getItem('bp_cart')) || [];
+      if(locCart.length === 0) {
+        alert("Your cart is empty!");
+        return;
+      }
+      window.location.href = "checkout.html";
+    }
+  </script>
+</body>
+</html>

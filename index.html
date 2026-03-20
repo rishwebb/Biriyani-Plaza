@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Biriyani Plaza | The Premium 3D Exerience</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <!-- GSAP CDN -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+</head>
+<body>
+
+  <!-- Global Navbar -->
+  <nav class="navbar" id="navbar">
+    <div class="container nav-container">
+      <a href="index.html" class="logo"><span class="text-gradient">Biriyani</span>Plaza</a>
+      <div class="nav-links">
+        <a href="index.html" class="active">Home</a>
+        <a href="menu.html">Menu</a>
+        <a href="order.html">Order Online</a>
+      </div>
+      <div class="nav-actions">
+        <a href="cart.html" class="cart-icon" style="text-decoration:none;">
+          <i class="fa-solid fa-bag-shopping"></i>
+          <span class="cart-count">0</span>
+        </a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Massive Hero Section -->
+  <header class="hero section">
+    <div class="container" style="display: flex; align-items: center; justify-content: space-between; position: relative; width: 100%;">
+      <div class="hero-content">
+        <h1 class="gsap-hero-title">Royal <br/> <span class="text-gradient">Flavors</span></h1>
+        <p class="gsap-hero-text">Immerse your senses in a luxurious culinary journey. We blend authentic spices carefully mapped to a breathtaking 3D dining experience.</p>
+        <div class="hero-buttons gsap-hero-btns">
+          <a href="menu.html" class="btn btn-primary">Order Now</a>
+          <a href="#about" class="btn btn-secondary">Explore</a>
+        </div>
+      </div>
+    </div>
+    <div class="hero-canvas-wrapper" id="hero-3d-wrapper">
+      <div class="floating-spice spice-1" style="width: 20px; height: 20px; top: 20%; left: 10%;"></div>
+      <div class="floating-spice spice-2" style="width: 15px; height: 15px; top: 70%; left: 80%; background: var(--accent-red);"></div>
+      <div class="floating-spice spice-3" style="width: 25px; height: 25px; top: 80%; left: 20%; background: var(--accent-gold);"></div>
+      <img src="https://images.unsplash.com/photo-1631515243349-e0cb75fb8d3a?w=1000&q=80" alt="Special Biryani" class="hero-plate" id="hero-plate">
+    </div>
+  </header>
+
+  <!-- About Section with Scroll Parallax -->
+  <section id="about" class="section">
+    <div class="container about-section">
+      <div class="about-img gsap-about-img">
+        <img src="https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?w=800&q=80" alt="Restaurant Ambiance">
+      </div>
+      <div class="about-text gsap-about-text">
+        <h2>A Legacy of <br/><span class="text-gradient">Culinary Art</span></h2>
+        <p>Located in the heart of Chakdaha, Biriyani Plaza is more than just a restaurant; it's an emotion. We source the finest basmati and hand-ground spices to deliver absolute perfection.</p>
+        <p>Our award-winning chefs have crafted menus that merge traditional Mughlai secrets with modern zest.</p>
+        <br>
+        <a href="menu.html" class="btn btn-secondary">Read More</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Featured 3D Cards Section -->
+  <section class="section" style="background: rgba(255,255,255,0.02);">
+    <div class="container">
+      <h2 style="font-size: 3rem; text-align: center; margin-bottom: 20px;" class="gsap-feature-title">Customer <span class="text-gradient">Favorites</span></h2>
+      <p style="text-align: center; color: var(--text-muted); max-width: 600px; margin: 0 auto;" class="gsap-feature-title">Voted the best dishes by our beloved customers in Chakdaha.</p>
+      
+      <div class="features-grid">
+        <!-- Card 1 -->
+        <div class="card-3d gsap-card">
+          <div class="card-image-wrap">
+            <img src="https://images.unsplash.com/photo-1563379091339-03b21ab4a4f8?w=800&q=80" alt="Biryani">
+          </div>
+          <div class="card-info">
+            <h3>Aloo Dum Biryani</h3>
+            <p>₹180</p>
+          </div>
+        </div>
+        <!-- Card 2 -->
+        <div class="card-3d gsap-card">
+          <div class="card-image-wrap">
+            <img src="https://images.unsplash.com/photo-1585937421612-70a008356fbe?w=800&q=80" alt="Paneer Tikka">
+          </div>
+          <div class="card-info">
+            <h3>Paneer Tikka</h3>
+            <p>₹220</p>
+          </div>
+        </div>
+        <!-- Card 3 -->
+        <div class="card-3d gsap-card">
+          <div class="card-image-wrap">
+            <img src="https://images.unsplash.com/photo-1588166524941-3bf61a9c41db?w=800&q=80" alt="Main Course">
+          </div>
+          <div class="card-info">
+            <h3>Butter Chicken</h3>
+            <p>₹340</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Massive Footer -->
+  <footer class="main-footer">
+    <div class="container footer-grid">
+      <div class="footer-brand">
+        <h2><span class="text-gradient">Biriyani</span> Plaza</h2>
+        <p>Experience the ultimate 3D dining journey in India. Best Biryani in Chakdaha Locality.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Explore</h4>
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="menu.html">Full Menu</a></li>
+          <li><a href="index.html#about">About Us</a></li>
+          <li><a href="order.html">Order Online</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Legal</h4>
+        <ul>
+          <li><a href="#">Privacy Policy</a></li>
+          <li><a href="#">Terms & Conditions</a></li>
+          <li><a href="#">Refund Policy</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Contact</h4>
+        <ul>
+          <li><a href="tel:+917699231380">+91 7699231380</a></li>
+          <li><a href="#">Lalpur, Chakdaha Locality</a></li>
+          <li><a href="#">Delivery only online</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; 2024 Biriyani Plaza Multicuisine. Pure HTML/CSS/JS 3D Experience.</p>
+    </div>
+  </footer>
+
+  <script src="js/main.js"></script>
+</body>
+</html>
