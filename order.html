@@ -29,6 +29,27 @@
     .btn-icon { width: 44px; height: 44px; display: flex; align-items: center; justify-content: center; background: rgba(255,255,255,0.05); border-radius: 50%; color: var(--text-main); font-size: 1.1rem; border: 1px solid var(--glass-border); transition: 0.3s; text-decoration: none; cursor: pointer; }
     .btn-icon:hover { background: var(--accent-orange); border-color: var(--accent-orange); transform: translateY(-3px); }
     .flex-1 { flex: 1; justify-content: center; }
+
+    @media (max-width: 900px) {
+      .menu-header { margin-bottom: 22px; }
+      .menu-header h1 { font-size: 2.8rem; }
+      .menu-layout { flex-direction: column; gap: 6px; }
+      .sidebar {
+        position: relative;
+        top: 0;
+        flex: none;
+        width: 100%;
+        padding: 0;
+        background: transparent;
+        border: none;
+      }
+      .sidebar h3 { display: none; }
+      .menu-grid {
+        margin-top: 2px;
+        gap: 16px;
+        grid-template-columns: 1fr;
+      }
+    }
   </style>
 </head>
 <body>
@@ -112,10 +133,44 @@
         const btns = categories.map(c => 
           `<button class="category-btn desktop-side-cat ${activeCategory === c ? 'active' : ''}" onclick="window.filterMenu('${c}')">${c}</button>`
         ).join("");
-        const sel = `<select class="mobile-side-cat" aria-label="Category" onchange="window.filterMenu(this.value)">` +
-          categories.map(c => `<option value="${c}" ${activeCategory === c ? 'selected' : ''}>${c}</option>`).join("") +
-          `</select>`;
-        categoryList.innerHTML = btns + sel;
+        const mobileMenuItems = categories.map(c =>
+          `<button type="button" class="mobile-cat-option ${activeCategory === c ? 'active' : ''}" data-category="${c}">${c}</button>`
+        ).join("");
+
+        const mobileDropdown = `
+          <div class="mobile-cat-dropdown" id="mobile-cat-dropdown">
+            <button type="button" class="mobile-cat-trigger" id="mobile-cat-trigger" aria-haspopup="listbox" aria-expanded="false">
+              <span>${activeCategory}</span>
+              <i class="fa-solid fa-chevron-down"></i>
+            </button>
+            <div class="mobile-cat-menu" id="mobile-cat-menu" role="listbox" aria-label="Category list">
+              ${mobileMenuItems}
+            </div>
+          </div>
+        `;
+
+        categoryList.innerHTML = btns + mobileDropdown;
+
+        const mobileTrigger = document.getElementById("mobile-cat-trigger");
+        const mobileDropdownWrap = document.getElementById("mobile-cat-dropdown");
+        const mobileMenu = document.getElementById("mobile-cat-menu");
+
+        if (mobileTrigger && mobileDropdownWrap && mobileMenu) {
+          mobileTrigger.addEventListener("click", (event) => {
+            event.stopPropagation();
+            const isOpen = mobileDropdownWrap.classList.toggle("open");
+            mobileTrigger.setAttribute("aria-expanded", String(isOpen));
+          });
+
+          mobileMenu.querySelectorAll(".mobile-cat-option").forEach((optionButton) => {
+            optionButton.addEventListener("click", () => {
+              const selectedCategory = optionButton.getAttribute("data-category") || "All";
+              mobileDropdownWrap.classList.remove("open");
+              mobileTrigger.setAttribute("aria-expanded", "false");
+              window.filterMenu(selectedCategory);
+            });
+          });
+        }
       }
 
       function renderGrid() {
@@ -152,6 +207,18 @@
         renderCategories();
         renderGrid();
       };
+
+      document.addEventListener("click", (event) => {
+        const mobileDropdownWrap = document.getElementById("mobile-cat-dropdown");
+        const mobileTrigger = document.getElementById("mobile-cat-trigger");
+
+        if (!mobileDropdownWrap || !mobileTrigger) return;
+
+        if (!mobileDropdownWrap.contains(event.target)) {
+          mobileDropdownWrap.classList.remove("open");
+          mobileTrigger.setAttribute("aria-expanded", "false");
+        }
+      });
 
       // Init
       renderCategories();
