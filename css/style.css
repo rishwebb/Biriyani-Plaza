@@ -501,13 +501,14 @@ h1, h2, h3, h4, h5, h6 {
   }
   
   .nav-container {
-    flex-wrap: wrap;
+    flex-wrap: wrap !important;
   }
   .logo { order: 1; font-size: 1.5rem; }
   .nav-actions { order: 2; }
   .nav-links {
     order: 3;
-    width: 100%;
+    flex: 0 0 100% !important;
+    width: 100% !important;
     justify-content: center;
     margin-top: 15px;
     gap: 15px;
