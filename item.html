@@ -120,16 +120,16 @@
         return;
       }
 
-      // We maintain state in JS for price
-      let qty = 1;
+      // We maintain state globally to ensure inline onclick handlers can access it
+      window.itemQty = 1;
 
       window.updateQty = (delta) => {
-        qty += delta;
-        if (qty < 1) qty = 1;
-        if (qty > 10) qty = 10;
-        document.getElementById('qty-val').innerText = qty;
-        document.getElementById('total-price').innerText = `₹${item.price * qty}`;
-        document.getElementById('btn-total').innerText = `₹${item.price * qty}`;
+        window.itemQty += delta;
+        if (window.itemQty < 1) window.itemQty = 1;
+        if (window.itemQty > 10) window.itemQty = 10;
+        document.getElementById('qty-val').innerText = window.itemQty;
+        document.getElementById('total-price').innerText = `₹${item.price * window.itemQty}`;
+        document.getElementById('btn-total').innerText = `₹${item.price * window.itemQty}`;
       };
 
       container.innerHTML = `
@@ -158,12 +158,12 @@
               <span class="price-text text-gradient" id="total-price">₹${item.price}</span>
               <div class="qty-controls">
                 <button class="qty-btn" onclick="updateQty(-1)"><i class="fa-solid fa-minus"></i></button>
-                <div class="qty-display" id="qty-val">${qty}</div>
+                <div class="qty-display" id="qty-val">${window.itemQty}</div>
                 <button class="qty-btn" onclick="updateQty(1)"><i class="fa-solid fa-plus"></i></button>
               </div>
             </div>
 
-            <button class="btn btn-primary" style="width: 100%; padding: 18px;" onclick="window.addToCart('${item.id}', '${item.name.replace(/'/g, "\\'")}', ${item.price}, '${item.image}', qty)">
+            <button class="btn btn-primary" style="width: 100%; padding: 18px;" onclick="window.addToCart('${item.id}', '${item.name.replace(/'/g, "\\'")}', ${item.price}, '${item.image}', window.itemQty)">
               <i class="fa-solid fa-bag-shopping" style="margin-right: 10px;"></i> Add to Cart — <span id="btn-total">₹${item.price}</span>
             </button>
           </div>
