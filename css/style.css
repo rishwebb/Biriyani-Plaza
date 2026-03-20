@@ -759,22 +759,16 @@ select:focus {
     width: 100%;
     justify-content: center;
     margin-top: 0;
-    gap: 10px;
+    gap: 14px;
     padding: 8px 12px;
     border-radius: 999px;
     border: 1px solid rgba(255, 255, 255, 0.08);
     background: rgba(255, 255, 255, 0.03);
   }
   .nav-links a {
-    font-size: 0.96rem;
-    padding: 6px 10px;
-    border-radius: 8px;
-    letter-spacing: 0.2px;
-  }
-
-  .nav-links a:hover,
-  .nav-links a.active {
-    background: rgba(255, 255, 255, 0.05);
+    font-size: 0.98rem;
+    min-width: 84px;
+    text-align: center;
   }
 
   .cart-icon {
@@ -887,12 +881,13 @@ select:focus {
   }
 
   .nav-links {
-    gap: 6px;
-    padding: 7px 6px;
+    justify-content: center;
+    gap: 10px;
+    padding: 7px 8px;
   }
 
   .nav-links a {
-    font-size: 0.9rem;
-    padding: 6px 8px;
+    font-size: 0.93rem;
+    min-width: 78px;
   }
 }
