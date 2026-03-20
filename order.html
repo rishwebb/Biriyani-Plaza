@@ -195,7 +195,7 @@
               <p class="item-desc">${item.description}</p>
               <div class="item-actions">
                 <a href="item.html?id=${item.id}" class="btn-icon" title="View Details"><i class="fa-solid fa-info"></i></a>
-                <button class="btn btn-primary flex-1 btn-small" style="padding: 10px; font-size: 0.9rem;" onclick="window.addToCart('${item.id}', '${item.name.replace(/'/g, "\\'")}', ${item.price}, '${item.image}')"><i class="fa-solid fa-cart-plus"></i> Add to Cart</button>
+                <button class="btn btn-primary flex-1 btn-small" style="padding: 10px; font-size: 0.9rem;" onclick="window.addToCart('${item.id}', '${item.name.replace(/'/g, "\\'")}', ${item.price}, '${item.image}')"><i class="fa-solid fa-cart-plus" style="margin-right: 7px;"></i> Add to Cart</button>
               </div>
             </div>
           </div>
