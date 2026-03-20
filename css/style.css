@@ -499,9 +499,20 @@ h1, h2, h3, h4, h5, h6 {
   .container {
     padding: 0 20px;
   }
-  .nav-links { gap: 10px; }
-  .nav-links a { font-size: 0.9rem; }
-  .logo { font-size: 1.5rem; }
+  
+  .nav-container {
+    flex-wrap: wrap;
+  }
+  .logo { order: 1; font-size: 1.5rem; }
+  .nav-actions { order: 2; }
+  .nav-links {
+    order: 3;
+    width: 100%;
+    justify-content: center;
+    margin-top: 15px;
+    gap: 15px;
+  }
+  .nav-links a { font-size: 1rem; }
   
   .hero {
     flex-direction: column;
