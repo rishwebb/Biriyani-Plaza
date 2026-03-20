@@ -595,13 +595,14 @@ h1, h2, h3, h4, h5, h6 {
   
   .menu-layout {
     flex-direction: column;
+    gap: 10px;
   }
   .sidebar {
     position: relative;
     top: 0;
     width: 100%;
     flex: none;
-    margin-bottom: 20px;
+    margin-bottom: 0 !important;
     background: transparent !important;
     border: none !important;
     padding: 0 !important;
