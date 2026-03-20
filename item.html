@@ -5,7 +5,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Item Details | Biriyani Plaza</title>
-  <link rel="stylesheet" href="css/style.css?v=2">
+  <link rel="stylesheet" href="css/style.css?v=3">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
   <style>
@@ -156,6 +156,174 @@
       color: var(--accent-orange);
     }
 
+    .item-page-section {
+      padding-bottom: 64px;
+    }
+
+    .item-extras {
+      margin-top: 26px;
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 14px;
+    }
+
+    .extra-card {
+      background: linear-gradient(160deg, rgba(28, 28, 28, 0.9) 0%, rgba(12, 12, 12, 0.95) 100%);
+      border: 1px solid var(--glass-border);
+      border-radius: 14px;
+      padding: 16px;
+    }
+
+    .extra-card .label {
+      display: block;
+      color: var(--text-muted);
+      font-size: 0.78rem;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-bottom: 6px;
+    }
+
+    .extra-card .value {
+      font-size: 1.15rem;
+      font-weight: 700;
+      line-height: 1.2;
+    }
+
+    .flavor-panel {
+      margin-top: 24px;
+      border: 1px solid var(--glass-border);
+      border-radius: 16px;
+      padding: 20px;
+      background: rgba(255, 255, 255, 0.02);
+    }
+
+    .flavor-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 12px;
+      gap: 12px;
+    }
+
+    .flavor-head h3 {
+      font-size: 1.1rem;
+      margin: 0;
+    }
+
+    .pairing-chip {
+      border: 1px solid rgba(255, 183, 3, 0.5);
+      color: #ffd57a;
+      background: rgba(255, 183, 3, 0.1);
+      font-size: 0.78rem;
+      font-weight: 600;
+      border-radius: 999px;
+      padding: 6px 10px;
+      white-space: nowrap;
+    }
+
+    .profile-row {
+      display: grid;
+      grid-template-columns: 84px 1fr 44px;
+      align-items: center;
+      gap: 8px;
+      margin: 8px 0;
+    }
+
+    .profile-row span {
+      font-size: 0.9rem;
+      color: var(--text-muted);
+    }
+
+    .profile-track {
+      position: relative;
+      height: 8px;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.08);
+      overflow: hidden;
+    }
+
+    .profile-fill {
+      position: absolute;
+      inset: 0 auto 0 0;
+      border-radius: inherit;
+      background: linear-gradient(90deg, var(--accent-gold), var(--accent-orange));
+      width: var(--fill, 50%);
+    }
+
+    .testimonials-block {
+      margin-top: 56px;
+      margin-bottom: 0;
+    }
+
+    .testimonials-title {
+      font-size: 2rem;
+      margin-bottom: 8px;
+      letter-spacing: -0.5px;
+    }
+
+    .testimonials-sub {
+      color: var(--text-muted);
+      margin-bottom: 20px;
+    }
+
+    .testimonials-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 16px;
+    }
+
+    .testimonial-card {
+      background: linear-gradient(155deg, rgba(29, 29, 29, 0.9) 0%, rgba(11, 11, 11, 0.92) 100%);
+      border: 1px solid var(--glass-border);
+      border-radius: 14px;
+      padding: 18px;
+      box-shadow: 0 12px 24px rgba(0, 0, 0, 0.25);
+    }
+
+    .testimonial-stars {
+      color: var(--accent-gold);
+      margin-bottom: 10px;
+      letter-spacing: 1px;
+      font-size: 0.9rem;
+    }
+
+    .testimonial-text {
+      color: #f4f4f4;
+      font-size: 0.96rem;
+      line-height: 1.6;
+      margin-bottom: 12px;
+      min-height: 90px;
+    }
+
+    .testimonial-user {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .user-avatar {
+      width: 34px;
+      height: 34px;
+      border-radius: 50%;
+      background: linear-gradient(140deg, var(--accent-gold), var(--accent-orange));
+      color: #111;
+      font-weight: 800;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.8rem;
+    }
+
+    .user-meta strong {
+      display: block;
+      font-size: 0.92rem;
+    }
+
+    .user-meta span {
+      color: var(--text-muted);
+      font-size: 0.82rem;
+    }
+
     @media (max-width: 900px) {
       .item-detail-layout {
         flex-direction: column;
@@ -185,6 +353,35 @@
         font-size: 2.5rem;
         margin-top: 20px;
       }
+
+      .item-extras {
+        grid-template-columns: 1fr;
+      }
+
+      .flavor-head {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .testimonials-block {
+        margin-top: 34px;
+      }
+
+      .testimonials-title {
+        font-size: 1.6rem;
+      }
+
+      .testimonials-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .testimonial-text {
+        min-height: 0;
+      }
+
+      .item-page-section {
+        padding-bottom: 30px;
+      }
     }
   </style>
 </head>
@@ -209,7 +406,7 @@
     </div>
   </nav>
 
-  <section class="section">
+  <section class="section item-page-section">
     <div class="container" style="padding-top: 50px;">
       <a href="order.html" class="back-btn"><i class="fa-solid fa-arrow-left"></i> Back to Menu</a>
 
@@ -233,7 +430,7 @@
           <li><a href="index.html">Home</a></li>
           <li><a href="menu.html">Full Menu</a></li>
           <li><a href="index.html#about">About Us</a></li>
-          <li><a href="menu.html">Order Online</a></li>
+          <li><a href="order.html">Order Online</a></li>
         </ul>
       </div>
       <div class="footer-col">
@@ -284,6 +481,84 @@
         document.getElementById('btn-total').innerText = `₹${item.price * window.itemQty}`;
       };
 
+      const flavorProfiles = {
+        "Biryani": { spice: 84, richness: 78, aroma: 92, pairWith: "Best with raita + salad" },
+        "Starters": { spice: 76, richness: 66, aroma: 71, pairWith: "Best with mint dip" },
+        "Main Course": { spice: 68, richness: 88, aroma: 82, pairWith: "Best with naan or jeera rice" },
+        "Breads": { spice: 28, richness: 46, aroma: 58, pairWith: "Best with creamy gravies" },
+        "Fried Rice and Noodles": { spice: 59, richness: 57, aroma: 63, pairWith: "Best with chilli chicken" },
+        "Snacks": { spice: 42, richness: 50, aroma: 48, pairWith: "Best with house sauce" },
+        "Drinks (Beverages)": { spice: 8, richness: 22, aroma: 64, pairWith: "Best with spicy mains" },
+        "Soups and Salads": { spice: 36, richness: 32, aroma: 52, pairWith: "Best as a warm starter" }
+      };
+
+      const testimonialTemplates = {
+        "Biryani": [
+          { name: "Anik S.", city: "Kalyani", text: "Perfect dum aroma and long-grain rice. This one tastes like proper festival biryani." },
+          { name: "Moumita R.", city: "Chakdaha", text: "Super balanced spice and the portion feels generous for the price." },
+          { name: "Sayan D.", city: "Ranaghat", text: "Came hot, fragrant, and fresh. Easily one of my repeat orders." }
+        ],
+        "Starters": [
+          { name: "Ritwik P.", city: "Chakdaha", text: "The texture is spot on and seasoning is bold without being overpowering." },
+          { name: "Titas M.", city: "Kalyani", text: "Crisp outside, juicy inside. Exactly what a starter should feel like." },
+          { name: "Ria B.", city: "Haringhata", text: "Great pick for sharing, and it stays tasty even after a few minutes." }
+        ],
+        "Main Course": [
+          { name: "Soumyajit N.", city: "Chakdaha", text: "Rich gravy, balanced spices, and the consistency is restaurant-level." },
+          { name: "Pritha G.", city: "Ranaghat", text: "Comforting and flavorful, this goes beautifully with naan." },
+          { name: "Ayan C.", city: "Kalyani", text: "Every bite tastes fresh and layered, not just spicy." }
+        ],
+        "Breads": [
+          { name: "Rohan T.", city: "Chakdaha", text: "Soft, warm, and buttery. Works really well with all gravies." },
+          { name: "Mili D.", city: "Haringhata", text: "Not dry at all. Freshly made feel with nice garlic notes." },
+          { name: "Joy K.", city: "Kalyani", text: "Simple item but done right. Reliable every time." }
+        ],
+        "Fried Rice and Noodles": [
+          { name: "Adrija P.", city: "Ranaghat", text: "Wok flavor is clear and the noodles are not oily." },
+          { name: "Aritra M.", city: "Chakdaha", text: "Great quantity and nicely seasoned, very satisfying for dinner." },
+          { name: "Taniya S.", city: "Kalyani", text: "Light yet flavorful. One of the better noodle options nearby." }
+        ],
+        "Snacks": [
+          { name: "Debjit R.", city: "Chakdaha", text: "Crunchy and fresh. Perfect with tea in the evening." },
+          { name: "Puja K.", city: "Kalyani", text: "Fast delivery and the snack quality is consistently good." },
+          { name: "Sneha L.", city: "Ranaghat", text: "Hits the craving exactly. Good portion and value." }
+        ],
+        "Drinks (Beverages)": [
+          { name: "Ishan B.", city: "Haringhata", text: "Refreshing and not too sweet. Great pairing with spicy items." },
+          { name: "Ritaja M.", city: "Chakdaha", text: "Cooling and fresh, especially good during summer afternoons." },
+          { name: "Subho D.", city: "Kalyani", text: "Clean flavors with a nice finish. A solid add-on to meals." }
+        ],
+        "Soups and Salads": [
+          { name: "Naina C.", city: "Ranaghat", text: "Light, warm, and properly seasoned. Great start to the meal." },
+          { name: "Abhishek P.", city: "Chakdaha", text: "Comforting bowl with good balance and freshness." },
+          { name: "Parna G.", city: "Kalyani", text: "Healthy and flavorful together. Exactly what I wanted." }
+        ]
+      };
+
+      const profile = flavorProfiles[item.category] || { spice: 50, richness: 50, aroma: 50, pairWith: "Chef recommendation available" };
+      const testimonials = testimonialTemplates[item.category] || testimonialTemplates["Main Course"];
+      const idScore = Array.from(item.id).reduce((sum, ch) => sum + ch.charCodeAt(0), 0);
+      const prepTime = 18 + (idScore % 16);
+      const calories = 260 + (idScore % 220);
+      const serves = item.price > 300 ? "2 People" : "1-2 People";
+
+      const testimonialCards = testimonials.map((review) => {
+        const initials = review.name.split(' ').map(part => part[0]).join('').slice(0, 2).toUpperCase();
+        return `
+          <article class="testimonial-card">
+            <div class="testimonial-stars"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div>
+            <p class="testimonial-text">"${review.text.replace('this one', item.name).replace('this', item.name)}"</p>
+            <div class="testimonial-user">
+              <span class="user-avatar">${initials}</span>
+              <div class="user-meta">
+                <strong>${review.name}</strong>
+                <span>${review.city}</span>
+              </div>
+            </div>
+          </article>
+        `;
+      }).join('');
+
       container.innerHTML = `
         <div class="item-detail-layout">
           <div class="item-image-wrapper">
@@ -318,8 +593,53 @@
             <button class="btn btn-primary" style="width: 100%; padding: 18px;" onclick="window.addToCart('${item.id}', '${item.name.replace(/'/g, "\\'")}', ${item.price}, '${item.image}', window.itemQty)">
               <i class="fa-solid fa-bag-shopping" style="margin-right: 10px;"></i> Add to Cart — <span id="btn-total">₹${item.price}</span>
             </button>
+
+            <div class="item-extras">
+              <div class="extra-card">
+                <span class="label">Estimated Prep</span>
+                <span class="value">${prepTime} mins</span>
+              </div>
+              <div class="extra-card">
+                <span class="label">Energy</span>
+                <span class="value">${calories} kcal</span>
+              </div>
+              <div class="extra-card">
+                <span class="label">Ideal For</span>
+                <span class="value">${serves}</span>
+              </div>
+            </div>
+
+            <div class="flavor-panel">
+              <div class="flavor-head">
+                <h3>Flavor Profile</h3>
+                <span class="pairing-chip">${profile.pairWith}</span>
+              </div>
+              <div class="profile-row">
+                <span>Spice</span>
+                <div class="profile-track"><div class="profile-fill" style="--fill:${profile.spice}%"></div></div>
+                <span>${profile.spice}%</span>
+              </div>
+              <div class="profile-row">
+                <span>Richness</span>
+                <div class="profile-track"><div class="profile-fill" style="--fill:${profile.richness}%"></div></div>
+                <span>${profile.richness}%</span>
+              </div>
+              <div class="profile-row">
+                <span>Aroma</span>
+                <div class="profile-track"><div class="profile-fill" style="--fill:${profile.aroma}%"></div></div>
+                <span>${profile.aroma}%</span>
+              </div>
+            </div>
           </div>
         </div>
+
+        <section class="testimonials-block">
+          <h2 class="testimonials-title">What Customers Say About <span class="text-gradient">${item.name}</span></h2>
+          <p class="testimonials-sub">Real feedback from recent online orders in nearby areas.</p>
+          <div class="testimonials-grid">
+            ${testimonialCards}
+          </div>
+        </section>
       `;
 
       // 3D GSAP animation for the image

@@ -2,12 +2,14 @@
 
 :root {
   --bg-dark: #070707;
-  --bg-gradient: radial-gradient(circle at center, #1a1a1a 0%, #070707 100%);
+  --bg-gradient: radial-gradient(circle at 22% 16%, #1f1a12 0%, #0f0f0f 42%, #070707 100%);
   --text-main: #ffffff;
   --text-muted: #ababab;
   --accent-gold: #ffb703;
   --accent-orange: #fb8500;
   --accent-red: #e63946;
+  --surface-1: rgba(20, 20, 20, 0.82);
+  --surface-2: rgba(12, 12, 12, 0.9);
   --glass-bg: rgba(25, 25, 25, 0.4);
   --glass-border: rgba(255, 255, 255, 0.08);
   --easing: cubic-bezier(0.16, 1, 0.3, 1);
@@ -34,6 +36,27 @@ body {
   line-height: 1.6;
 }
 
+body::before,
+body::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: -1;
+}
+
+body::before {
+  background:
+    radial-gradient(640px circle at 88% 8%, rgba(251, 133, 0, 0.12) 0%, rgba(251, 133, 0, 0) 65%),
+    radial-gradient(560px circle at 8% 82%, rgba(255, 183, 3, 0.08) 0%, rgba(255, 183, 3, 0) 65%);
+}
+
+body::after {
+  background-image: linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px);
+  background-size: 50px 50px;
+  opacity: 0.18;
+}
+
 /* Typography */
 h1, h2, h3, h4, h5, h6 {
   line-height: 1.2;
@@ -48,14 +71,19 @@ h1, h2, h3, h4, h5, h6 {
 
 /* Utilities */
 .container {
-  max-width: 1400px;
+  max-width: 1320px;
   margin: 0 auto;
-  padding: 0 40px;
+  padding: 0 34px;
 }
 
 .section {
-  padding: 120px 0;
+  padding: 110px 0;
   position: relative;
+}
+
+/* Subtle transition without stacked pseudo-element artifacts */
+.section + .section {
+  box-shadow: inset 0 24px 22px -26px rgba(0, 0, 0, 0.45);
 }
 
 .flex-center {
@@ -78,6 +106,22 @@ h1, h2, h3, h4, h5, h6 {
   cursor: pointer;
   border: none;
   white-space: nowrap;
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+}
+
+.btn::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(115deg, rgba(255,255,255,0) 25%, rgba(255,255,255,0.3) 50%, rgba(255,255,255,0) 75%);
+  transform: translateX(-140%);
+  transition: transform 0.55s ease;
+}
+
+.btn:hover::after {
+  transform: translateX(140%);
 }
 
 .btn-primary {
@@ -92,7 +136,7 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .btn-secondary {
-  background: transparent;
+  background: rgba(255, 255, 255, 0.02);
   color: var(--text-main);
   border: 1px solid var(--glass-border);
 }
@@ -110,14 +154,16 @@ h1, h2, h3, h4, h5, h6 {
   padding: 30px 0;
   z-index: 1000;
   transition: all 0.5s var(--easing);
+  border-bottom: 1px solid transparent;
 }
 
 .navbar.scrolled {
   padding: 15px 0;
-  background: rgba(0, 0, 0, 0.85);
+  background: rgba(6, 6, 6, 0.82);
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
-  border-bottom: 1px solid var(--glass-border);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+  box-shadow: 0 10px 28px rgba(0, 0, 0, 0.34);
 }
 
 .nav-container {
@@ -132,6 +178,7 @@ h1, h2, h3, h4, h5, h6 {
   text-decoration: none;
   color: white;
   letter-spacing: -1px;
+  text-shadow: 0 8px 22px rgba(0, 0, 0, 0.35);
 }
 
 .nav-links {
@@ -148,18 +195,50 @@ h1, h2, h3, h4, h5, h6 {
   position: relative;
 }
 
+.nav-links a::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -8px;
+  width: 100%;
+  height: 2px;
+  background: linear-gradient(90deg, var(--accent-gold), var(--accent-orange));
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.28s ease;
+}
+
 .nav-links a:hover, .nav-links a.active {
   color: var(--text-main);
 }
 
+.nav-links a:hover::after,
+.nav-links a.active::after {
+  transform: scaleX(1);
+}
+
 /* Global Navbar Cart */
 .cart-icon {
-  background: none;
+  background: rgba(255, 255, 255, 0.04);
   border: none;
   color: white;
   cursor: pointer;
   position: relative;
   font-size: 1.5rem;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  transition: all 0.25s ease;
+}
+
+.cart-icon:hover {
+  border-color: rgba(251, 133, 0, 0.55);
+  box-shadow: 0 10px 24px rgba(251, 133, 0, 0.22);
+  transform: translateY(-2px);
 }
 
 .cart-count {
@@ -180,11 +259,33 @@ h1, h2, h3, h4, h5, h6 {
 
 /* Footer (Unified for all pages) */
 .main-footer {
-  background: #000;
+  background: linear-gradient(180deg, #070707 0%, #030303 100%);
   padding: 80px 0 40px 0;
   border-top: 1px solid var(--glass-border);
   position: relative;
   overflow: hidden;
+}
+
+.main-footer::before {
+  content: "";
+  position: absolute;
+  top: -140px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: min(720px, 90vw);
+  height: 250px;
+  border-radius: 50%;
+  background: radial-gradient(ellipse at center, rgba(251, 133, 0, 0.22) 0%, rgba(251, 133, 0, 0) 70%);
+  pointer-events: none;
+}
+
+.main-footer::after {
+  content: none;
+}
+
+.main-footer > .container {
+  position: relative;
+  z-index: 2;
 }
 
 .footer-grid {
@@ -260,6 +361,7 @@ h1, h2, h3, h4, h5, h6 {
   margin-bottom: 20px;
   line-height: 1;
   text-transform: uppercase;
+  text-shadow: 0 24px 36px rgba(0, 0, 0, 0.38);
 }
 
 .hero p {
@@ -309,13 +411,19 @@ h1, h2, h3, h4, h5, h6 {
 
 /* Animated 3D Cards */
 .card-3d {
-  background: var(--glass-bg);
-  border: 1px solid var(--glass-border);
+  background: linear-gradient(155deg, rgba(30, 30, 30, 0.72), rgba(12, 12, 12, 0.82));
+  border: 1px solid rgba(255, 255, 255, 0.12);
   border-radius: 20px;
   padding: 30px;
   perspective: 1500px;
   transform-style: preserve-3d;
-  transition: background 0.3s;
+  transition: background 0.3s, transform 0.3s ease, border-color 0.3s ease;
+}
+
+.featured-card-link {
+  text-decoration: none;
+  color: inherit;
+  display: block;
 }
 
 .card-image-wrap {
@@ -339,7 +447,9 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .card-3d:hover {
-  background: rgba(35, 35, 35, 0.6);
+  background: linear-gradient(155deg, rgba(36, 36, 36, 0.76), rgba(14, 14, 14, 0.9));
+  border-color: rgba(251, 133, 0, 0.38);
+  transform: translateY(-6px);
 }
 
 .card-info {
@@ -382,6 +492,30 @@ h1, h2, h3, h4, h5, h6 {
   border-radius: 20px;
   transform: rotateY(15deg);
   box-shadow: -30px 30px 50px rgba(0,0,0,0.5);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+}
+
+.classic-menu-container,
+.cart-items-list,
+.cart-summary,
+.checkout-container,
+.menu-item-card,
+.testimonial-card,
+.extra-card {
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+}
+
+input,
+textarea,
+select {
+  transition: border-color 0.25s ease, box-shadow 0.25s ease, background-color 0.25s ease;
+}
+
+input:focus,
+textarea:focus,
+select:focus {
+  box-shadow: 0 0 0 3px rgba(251, 133, 0, 0.2);
 }
 
 .about-text {
@@ -584,30 +718,65 @@ h1, h2, h3, h4, h5, h6 {
 @media (max-width: 900px) {
   .desktop-side-cat { display: none !important; }
   .mobile-cat-dropdown { display: block; }
+
+  .navbar {
+    padding: 12px 0;
+    background: linear-gradient(180deg, rgba(8, 8, 8, 0.95) 0%, rgba(8, 8, 8, 0.86) 100%);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.03);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.28);
+  }
+
+  .navbar::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: -22px;
+    height: 26px;
+    pointer-events: none;
+    background: linear-gradient(180deg, rgba(8, 8, 8, 0.5) 0%, rgba(8, 8, 8, 0.18) 45%, rgba(8, 8, 8, 0) 100%);
+    filter: blur(6px);
+  }
   
   .container {
-    padding: 0 20px;
+    padding: 0 18px;
   }
   
   .nav-container {
-    flex-wrap: wrap !important;
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    align-items: center;
+    column-gap: 10px;
+    row-gap: 8px;
   }
-  .logo { order: 1; font-size: 1.5rem; }
-  .nav-actions { order: 2; }
+  .logo { order: 1; font-size: 1.9rem; }
+  .nav-actions { order: 2; justify-self: end; }
   .nav-links {
     order: 3;
-    flex: 0 0 100% !important;
-    width: 100% !important;
+    grid-column: 1 / -1;
+    width: 100%;
     justify-content: center;
-    margin-top: 15px;
-    gap: 15px;
+    margin-top: 0;
+    gap: 18px;
+    padding: 8px 12px;
+    border-radius: 999px;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    background: rgba(255, 255, 255, 0.03);
   }
-  .nav-links a { font-size: 1rem; }
+  .nav-links a { font-size: 0.98rem; }
+
+  .cart-icon {
+    width: 42px;
+    height: 42px;
+    font-size: 1.35rem;
+  }
   
   .hero {
     flex-direction: column;
     text-align: center;
-    padding-top: 140px;
+    padding-top: 168px;
     min-height: auto;
   }
   .hero-content {
@@ -615,7 +784,7 @@ h1, h2, h3, h4, h5, h6 {
     padding-right: 0;
   }
   .hero h1 {
-    font-size: 4rem;
+    font-size: 3.5rem;
   }
   .hero-buttons {
     justify-content: center;
@@ -653,6 +822,14 @@ h1, h2, h3, h4, h5, h6 {
     text-align: center;
     gap: 30px;
   }
+
+  .section {
+    padding: 92px 0;
+  }
+
+  .section + .section {
+    box-shadow: inset 0 18px 20px -24px rgba(0, 0, 0, 0.38);
+  }
   .footer-col h4 {
     margin-bottom: 10px;
   }
@@ -683,5 +860,28 @@ h1, h2, h3, h4, h5, h6 {
   }
   .menu-header-classic h1 {
     font-size: 2.5rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .hero {
+    padding-top: 176px;
+  }
+
+  .hero h1 {
+    font-size: 2.9rem;
+  }
+
+  .logo {
+    font-size: 1.72rem;
+  }
+
+  .nav-links {
+    gap: 14px;
+    padding: 7px 8px;
+  }
+
+  .nav-links a {
+    font-size: 0.93rem;
   }
 }
