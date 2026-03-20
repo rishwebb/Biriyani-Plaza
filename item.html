@@ -26,6 +26,15 @@
     .qty-display { width: 40px; text-align: center; font-size: 1.2rem; font-weight: bold; }
     .back-btn { margin-bottom: 20px; display: inline-flex; align-items: center; gap: 10px; color: var(--text-muted); text-decoration: none; transition: 0.3s; }
     .back-btn:hover { color: var(--accent-orange); }
+
+    @media (max-width: 900px) {
+      .item-detail-layout { flex-direction: column; gap: 30px; text-align: center; }
+      .item-image-wrapper { width: 100%; margin-bottom: 20px; }
+      .hero-platter { max-width: 80%; }
+      .rating-wrapper { justify-content: center; }
+      .price-bar { flex-direction: column; gap: 15px; }
+      h1.title { font-size: 2.5rem; margin-top: 20px; }
+    }
   </style>
 </head>
 <body>
