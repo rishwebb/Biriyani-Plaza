@@ -488,3 +488,84 @@ h1, h2, h3, h4, h5, h6 {
 .cart-total-row {
   color: white; font-size: 1.5rem; font-weight: bold; margin: 20px 0; padding-top: 20px; border-top: 1px dashed rgba(255,255,255,0.1);
 }
+
+/* --- Responsive Mobile Styles --- */
+@media (max-width: 900px) {
+  .container {
+    padding: 0 20px;
+  }
+  .nav-links { gap: 10px; }
+  .nav-links a { font-size: 0.9rem; }
+  .logo { font-size: 1.5rem; }
+  
+  .hero {
+    flex-direction: column;
+    text-align: center;
+    padding-top: 140px;
+    min-height: auto;
+  }
+  .hero-content {
+    width: 100%;
+    padding-right: 0;
+  }
+  .hero h1 {
+    font-size: 4rem;
+  }
+  .hero-buttons {
+    justify-content: center;
+  }
+  .hero-canvas-wrapper {
+    position: relative;
+    width: 100%;
+    height: 400px;
+    transform: none;
+    top: 0;
+    right: auto;
+    left: auto;
+    margin-top: 30px;
+  }
+  .hero-plate {
+    width: 80%;
+    height: auto;
+    aspect-ratio: 3/4;
+  }
+  
+  .about-section {
+    flex-direction: column;
+    text-align: center;
+  }
+  .about-text h2 {
+    font-size: 2.5rem;
+  }
+  
+  .features-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .footer-grid {
+    grid-template-columns: 1fr;
+    text-align: center;
+    gap: 30px;
+  }
+  .footer-col h4 {
+    margin-bottom: 10px;
+  }
+  
+  .menu-layout {
+    flex-direction: column;
+  }
+  .sidebar {
+    position: relative;
+    top: 0;
+    width: 100%;
+    flex: none;
+    margin-bottom: 20px;
+  }
+  
+  .classic-menu-container {
+    padding: 30px 20px;
+  }
+  .menu-header-classic h1 {
+    font-size: 2.5rem;
+  }
+}
