@@ -494,8 +494,14 @@ h1, h2, h3, h4, h5, h6 {
   color: white; font-size: 1.5rem; font-weight: bold; margin: 20px 0; padding-top: 20px; border-top: 1px dashed rgba(255,255,255,0.1);
 }
 
+.mobile-side-cat { display: none; width: 100%; padding: 15px; border-radius: 8px; background: rgba(25,25,25,0.8); color: white; border: 1px solid var(--accent-orange); font-size: 1.1rem; outline: none; margin-bottom: 20px; font-weight: bold; cursor: pointer; }
+.mobile-side-cat option { background: var(--bg-dark); color: white; }
+
 /* --- Responsive Mobile Styles --- */
 @media (max-width: 900px) {
+  .desktop-side-cat { display: none !important; }
+  .mobile-side-cat { display: block; }
+  
   .container {
     padding: 0 20px;
   }

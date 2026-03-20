@@ -109,9 +109,13 @@
       let activeCategory = "All";
 
       function renderCategories() {
-        categoryList.innerHTML = categories.map(c => 
-          `<button class="category-btn ${activeCategory === c ? 'active' : ''}" onclick="window.filterMenu('${c}')">${c}</button>`
+        const btns = categories.map(c => 
+          `<button class="category-btn desktop-side-cat ${activeCategory === c ? 'active' : ''}" onclick="window.filterMenu('${c}')">${c}</button>`
         ).join("");
+        const sel = `<select class="mobile-side-cat" aria-label="Category" onchange="window.filterMenu(this.value)">` +
+          categories.map(c => `<option value="${c}" ${activeCategory === c ? 'selected' : ''}>${c}</option>`).join("") +
+          `</select>`;
+        categoryList.innerHTML = btns + sel;
       }
 
       function renderGrid() {
